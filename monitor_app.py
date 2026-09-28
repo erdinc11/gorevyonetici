@@ -1451,9 +1451,9 @@ class PerformanceApp:
         page.pack_start(self._chart("İşlemci etkinliği", "Son 90 örnek · toplam kullanım", [("Kullanım", "cpu", BLUE)], 100, False), False, True, 0)
         freq = f"{c['mhz']/1000:.2f} GHz" if c["mhz"] else "—"
         rows = [("Kullanım", f"{c['usage']:.1f}%", "Tüm mantıksal işlemcilerin ortalaması"),
-                ("Anlık hız", freq, "Çekirdeklerin ölçülen ortalama frekansı"),
-                ("İşlem", str(c["processes"]), "Çalışan süreç sayısı"),
-                ("İş parçacığı", str(c["threads"]), "Süreçler genelindeki Linux thread sayısı"),
+                ("Anlık hız", freq, "Çekirdeklerin ölçülen ortalama frekansı")]
+        if c["temp"] is not None: rows.append(("En yüksek CPU sıcaklığı", f"{c['temp']:.0f} °C", "Erişilebilen sıcaklık sensörleri"))
+        rows += [("İş parçacığı", str(c["threads"]), "Süreçler genelindeki Linux thread sayısı"),
                 ("Açık tanıtıcı", f"{c['open_files']:,}", f"Linux dosya tablosu · sistem sınırı {c['open_files_limit']:,}"),
                 ("Çekirdek", str(c["cores"]), "Fiziksel çekirdek"),
                 ("Mantıksal işlemci", str(c["logical"]), "İşletim sisteminin gördüğü iş parçacığı"),
@@ -1462,7 +1462,7 @@ class PerformanceApp:
                 ("Çalışma süresi", str(timedelta(seconds=int(c["uptime"]))), "Sistemin son açılışından beri")]
         if c["max_mhz"]: rows.append(("Raporlanan üst hız", f"{c['max_mhz']/1000:.2f} GHz", "Sürücünün bildirdiği frekans sınırı"))
         if c["base_mhz"]: rows.append(("Temel hız", f"{c['base_mhz']/1000:.2f} GHz", "CPU frekans sürücüsünün bildirdiği temel hız"))
-        if c["temp"] is not None: rows.append(("En yüksek CPU sıcaklığı", f"{c['temp']:.0f} °C", "Erişilebilen sıcaklık sensörleri"))
+        rows.append(("İşlem", str(c["processes"]), "Çalışan süreç sayısı"))
         for level, size in sorted(c["caches"].items()): rows.append((f"{level} önbellek", size, "CPU sysfs topoloji bilgisi"))
         page.pack_start(self._tiles(rows, 4), False, True, 0)
         if c["per_core"]:
