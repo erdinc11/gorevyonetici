@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Sistem Performansı
+Name[tr]=Sistem Performansı
+Comment=Canlı CPU, bellek, disk, ağ, Bluetooth ve GPU izleme
+Exec=/usr/bin/python3 "/home/anon/Masaüstü/gorevyonetici/monitor_app.py"
+Icon=/home/anon/Masaüstü/gorevyonetici/system-monitor.svg
+Terminal=false
+StartupNotify=true
+Categories=System;Monitor;
+Keywords=CPU;RAM;GPU;disk;network;performance;
